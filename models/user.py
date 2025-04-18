@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 from core.database import Base
+from sqlalchemy.orm import relationship
 
 class User(Base):
     __tablename__ = "users"
@@ -11,3 +12,6 @@ class User(Base):
     # Ostale kolone koje treba da budu mapirane
     first_name: Mapped[str] = mapped_column(String)
     last_name: Mapped[str] = mapped_column(String)
+
+       # Veza sa postovima
+    posts: Mapped[list["Post"]] = relationship("Post", back_populates="author")
